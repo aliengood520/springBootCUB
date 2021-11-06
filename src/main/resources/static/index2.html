@@ -1,0 +1,211 @@
+
+	<html><meta http-equiv="Content-Type"content="text/html; charset=utf8">
+
+	<title>網夢海。吉品資訊社網站</title>
+	<style>body,td,a
+	{font-size:9pt;color:000000;text-decoration:none}.none{border:black 1px solid;background:D9D9D9;padding-top:2}.over
+	{border:black 1px solid;background:707888;color:white;padding-top:2}</style>
+
+	<head>
+
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+	<script type="text/javascript">
+
+
+	</script>
+	</head>
+
+	<body>
+	英文單字
+	<form method =post name=form1 action="index.php" >
+
+	<br>code:<input type =text  id=code value="A4718" >
+	<br>name:<input type =text  id=chinessName value="chinessName" >
+	</form>
+	
+<div id = "testM" style="color:red;border:1px blue solid;font-size:15px;padding:10px;width:100px;">testM</div>
+	
+<div id = "getMember" style="color:red;border:1px blue solid;font-size:15px;padding:10px;width:100px;">getMember</div>
+	
+<div id = "delMember" style="color:red;border:1px blue solid;font-size:15px;padding:10px;width:100px;">delMember</div>
+	
+<div id = "postMember" style="color:red;border:1px blue solid;font-size:15px;padding:10px;width:100px;">postMember</div>
+
+<div id = "putMember" style="color:red;border:1px blue solid;font-size:15px;padding:10px;width:100px;">putMember</div>
+	
+	<script>
+
+	$(document).ready(function(){
+		$("#testM").click(function(){
+			
+			$(this).test();
+					
+		});
+	$("#getMember").click(function(){
+		
+		$(this).gueryMember();
+				
+	});
+	$("#delMember").click(function(){
+		
+		$(this).delMember();
+				
+	});
+	$("#postMember").click(function(){
+		
+		$(this).postMember();
+				
+	});
+	$("#putMember").click(function(){
+		
+		$(this).putMember();
+				
+	});
+	
+
+
+});
+
+
+
+		
+
+	$.fn.test=function (){
+		//alert($('#memberid').val())
+	  $.ajax({
+	    url: 'coins/test',
+	    type: 'GET',
+	  //dataType: "json",
+	    data: {
+		  
+		  
+	    },
+	    error: function(xhr) {
+	      alert('Ajax request 發生錯誤');
+	    },
+	    success: function(response) {
+	    	alert("success")
+	    }
+	  });
+	};
+
+
+	$.fn.gueryMember=function (){
+		//alert($('#memberid').val())
+	  $.ajax({
+	    url: 'coins/'+$('#code').val(),
+	    type: 'GET',
+	  //dataType: "json",
+	    data: {
+		  
+		  
+	    },
+	    error: function(xhr) {
+	      alert('Ajax request 發生錯誤');
+	    },
+	    success: function(response) {
+	    	if(response == undefined)
+	    	alert(response)
+	    	else
+	    	alert(response.code+" "+response.chinessName+" "+response.emp_count);
+	    }
+	  });
+	};
+
+
+	$.fn.delMember=function (){
+		//alert($('#memberid').val())
+	  $.ajax({
+	    url: 'coins/'+$('#code').val(),
+	    type: 'DELETE',
+	  //dataType: "json",
+	    data: {
+		  
+		  
+	    },
+	    error: function(xhr) {
+	      alert('Ajax request 發生錯誤');
+	    },
+	    success: function() {
+	    	alert("success");
+	    }
+	  });
+	};
+	
+	$.fn.postMember=function (){
+		//alert($('#memberid').val())
+		
+      // collect the form data while iterating over the inputs
+     $.ajax({
+             type: "POST",
+             url: "coins",
+             data: JSON.stringify({
+            	 code:$('#code').val()
+            	 ,chinessName:$('#chinessName').val()
+             }),
+             //data: {"id":1234},
+             contentType: "application/json",
+             crossDomain: true,
+             dataType: "json",
+             success: function (data, status, jqXHR) {
+
+                 alert(data.chinessName);
+             },
+
+             error: function (jqXHR, status) {
+                 // error handler
+                 console.log(jqXHR);
+                 alert('fail' + status.code);
+             }
+          });
+    
+	};
+
+	
+
+	$.fn.putMember=function (){
+		//alert($('#memberid').val())
+		
+      // collect the form data while iterating over the inputs
+      
+
+     $.ajax({
+             type: "PUT",
+             url: "coins",
+             data: JSON.stringify({
+            	 code:$('#code').val()
+            	 ,chinessName:$('#chinessName').val()
+             }),
+             //data: {"id":1234},
+             contentType: "application/json",
+             crossDomain: true,
+             dataType: "json",
+             success: function (data, status, jqXHR) {
+
+                 alert(data.code);
+             },
+
+             error: function (jqXHR, status) {
+                 // error handler
+                 console.log(jqXHR);
+                 alert('fail' + status.code);
+             }
+          });
+    
+	};
+	
+
+
+
+
+
+
+
+	</script>
+
+	</body>
+
+	</html>
